@@ -1,0 +1,8 @@
+Health Report for Patient: 150 (hassan)
+
+=== Vital Signs History ===
+No vital signs recorded.
+=== Feedback History ===
+No feedback recorded.
+=== Prescription History ===
+No prescriptions recorded.

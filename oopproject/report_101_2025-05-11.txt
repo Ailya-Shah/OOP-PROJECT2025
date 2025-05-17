@@ -1,0 +1,35 @@
+Health Report for Patient 101
+
+Vitals History:
+Patient: 101
+Heart Rate: 75.00
+Blood Pressure: 120.00
+Temperature: 36.60
+Oxygen Level: 98.00
+Date: 2025-05-11
+
+Patient: 101
+Heart Rate: 80.00
+Blood Pressure: 130.00
+Temperature: 37.00
+Oxygen Level: 95.00
+Date: 2025-05-11
+
+Patient: 101
+Heart Rate: 75.00
+Blood Pressure: 120.00
+Temperature: 36.60
+Oxygen Level: 98.00
+Date: 2025-05-11
+
+Patient: 101
+Heart Rate: 80.00
+Blood Pressure: 130.00
+Temperature: 37.00
+Oxygen Level: 95.00
+Date: 2025-05-11
+
+
+Feedback History:
+
+Prescription History:
