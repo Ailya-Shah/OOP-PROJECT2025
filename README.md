@@ -1,9 +1,9 @@
 
 
+```markdown
 # 🌟 Remote Patient Monitoring System (RPMS)
 
 *A comprehensive Java-based telemedicine platform with real-time monitoring, secure communication, and health analytics*
-
 
 ---
 
@@ -51,7 +51,7 @@ All dependencies are managed through Maven. Key dependencies include:
 <dependency>
     <groupId>mysql</groupId>
     <artifactId>mysql-connector-java</artifactId>
-    <version>8.0.28</version>
+    <version>8.0.33</version>
 </dependency>
 
 <!-- Email -->
@@ -63,7 +63,7 @@ All dependencies are managed through Maven. Key dependencies include:
 
 <!-- HTTP Client -->
 <dependency>
-    <groupId>java.net.http</groupId>
+    <groupId>org.apache.httpcomponents</groupId>
     <artifactId>httpclient</artifactId>
     <version>4.5.13</version>
 </dependency>
@@ -72,119 +72,73 @@ All dependencies are managed through Maven. Key dependencies include:
 <dependency>
     <groupId>org.openjfx</groupId>
     <artifactId>javafx-controls</artifactId>
-    <version>17.0.2</version>
+    <version>20</version>
 </dependency>
 
 <!-- Twilio (optional) -->
 <dependency>
     <groupId>com.twilio.sdk</groupId>
     <artifactId>twilio</artifactId>
-    <version>8.31.0</version>
-</dependency>
-
-<!-- Testing -->
-<dependency>
-    <groupId>org.junit.jupiter</groupId>
-    <artifactId>junit-jupiter-api</artifactId>
-    <version>5.8.2</version>
-    <scope>test</scope>
+    <version>9.2.3</version>
 </dependency>
 ```
 
-Full `pom.xml` available in the project root.
+---
+
+## 📥 Direct JAR Downloads
+
+For manual installation, download these required JARs:
+
+1. **Jakarta Mail**
+   - [jakarta.mail-2.0.1.jar](https://repo1.maven.org/maven2/com/sun/mail/jakarta.mail/2.0.1/jakarta.mail-2.0.1.jar)
+   - [jakarta.activation-2.0.1.jar](https://repo1.maven.org/maven2/com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar)
+
+2. **MySQL Connector**
+   - [mysql-connector-j-8.0.33.jar](https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar)
+
+3. **Twilio**
+   - [twilio-9.2.3.jar](https://repo1.maven.org/maven2/com/twilio/sdk/twilio/9.2.3/twilio-9.2.3.jar)
+
+4. **JavaFX SDK**
+   - [Download JavaFX 20](https://gluonhq.com/products/javafx/)
 
 ---
 
 ## 🚀 Quick Start Guide
 
 ### 1. Prerequisites
-
 - Java 17+ ([Download](https://adoptium.net/))
 - MySQL 8.0+ ([Download](https://dev.mysql.com/downloads/))
 - Maven 3.8+ ([Download](https://maven.apache.org/download.cgi))
 
-
-Here are the direct download links for all required JAR files:
-
-## 📥 Essential JAR File Downloads
-
-### 1. **Jakarta Mail (Email Notifications)**
-- [jakarta.mail-2.0.1.jar](https://repo1.maven.org/maven2/com/sun/mail/jakarta.mail/2.0.1/jakarta.mail-2.0.1.jar)
-- [jakarta.activation-2.0.1.jar](https://repo1.maven.org/maven2/com/sun/activation/jakarta.activation/2.0.1/jakarta.activation-2.0.1.jar) *(Required dependency)*
-
-### 2. **MySQL JDBC Connector**
-- [mysql-connector-j-8.0.33.jar](https://repo1.maven.org/maven2/com/mysql/mysql-connector-j/8.0.33/mysql-connector-j-8.0.33.jar) *(Latest version)*
-- [Alternative Download](https://dev.mysql.com/downloads/connector/j/) (Official MySQL site)
-
-### 3. **Twilio (SMS Notifications)**
-- [twilio-9.2.3.jar](https://repo1.maven.org/maven2/com/twilio/sdk/twilio/9.2.3/twilio-9.2.3.jar) *(Latest version)*
-- [jwt-0.9.1.jar](https://repo1.maven.org/maven2/io/jsonwebtoken/jjwt/0.9.1/jjwt-0.9.1.jar) *(Required dependency)*
-
-### 4. **JavaFX (For UI)**
-- [Full JavaFX SDK 20](https://gluonhq.com/products/javafx/) (Download appropriate version for your OS)
-
-### 5. **Apache HTTP Client**
-- [httpclient-4.5.13.jar](https://repo1.maven.org/maven2/org/apache/httpcomponents/httpclient/4.5.13/httpclient-4.5.13.jar)
-- [httpcore-4.4.13.jar](https://repo1.maven.org/maven2/org/apache/httpcomponents/httpcore/4.4.13/httpcore-4.4.13.jar) *(Required dependency)*
-
-### 6. **JSON Processing (For Twilio)**
-- [jackson-databind-2.15.2.jar](https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-databind/2.15.2/jackson-databind-2.15.2.jar)
-- [jackson-core-2.15.2.jar](https://repo1.maven.org/maven2/com/fasterxml/jackson/core/jackson-core/2.15.2/jackson-core-2.15.2.jar)
-
-
 ### 2. Database Setup
-
 ```bash
-# Create database (run in MySQL shell)
+# Create database
 CREATE DATABASE hospitalmanagementsystem;
-USE hospitalmanagementsystem;
 
-# Create tables (schema provided in /sql/setup.sql)
+# Import schema
 mysql -u root -p hospitalmanagementsystem < sql/setup.sql
-
-# Insert sample data (optional)
-mysql -u root -p hospitalmanagementsystem < sql/sample_data.sql
 ```
 
 ### 3. Configuration
-
-Create `.env` file in project root:
-
+Create `.env` file:
 ```env
-# Database
 DB_URL=jdbc:mysql://localhost:3306/hospitalmanagementsystem
 DB_USER=root
 DB_PASS=yourpassword
-
-# Email (Gmail example)
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587
 SMTP_USER=your@gmail.com
-SMTP_PASS=your-app-password  # Use app-specific password
-
-# Twilio (optional)
-TWILIO_ACCOUNT_SID=your_account_sid
-TWILIO_AUTH_TOKEN=your_auth_token
+SMTP_PASS=your-app-password
 ```
 
 ### 4. Build & Run
-
 ```bash
-# Clone repository
 git clone https://github.com/Ailya-Shah/OOP-PROJECT2025
-cd rpms
-
-# Build with Maven
+cd OOP-PROJECT2025
 mvn clean install
-
-# Run application
 mvn javafx:run
 ```
-
-For development in IDE:
-1. Import as Maven project
-2. Set VM options: `--module-path /path/to/javafx-sdk-17.0.2/lib --add-modules javafx.controls,javafx.fxml`
-3. Run `RPMSMain.java`
 
 ---
 
@@ -192,10 +146,9 @@ For development in IDE:
 
 | Issue | Solution |
 |-------|----------|
-| MySQL connection failed | Verify credentials in `.env` and ensure MySQL service is running |
-| Email sending fails | Enable "Less secure apps" in Gmail or use app-specific password |
-| Twilio SMS not working | Verify account SID/auth token and phone number format (+E.164) |
-| JavaFX not loading | Ensure correct module path and Java 17+ is used |
+| MySQL Connection Failed | Verify credentials and service status |
+| Email Not Sending | Check SMTP settings and enable less secure apps |
+| JavaFX Errors | Ensure correct Java version and module path |
 
 ---
 
@@ -211,32 +164,20 @@ erDiagram
     PATIENTS ||--o{ FEEDBACK : "1:N"
     PATIENTS ||--o{ PRESCRIPTIONS : "1:N"
     DOCTORS ||--o{ APPOINTMENTS : "1:N"
-    DOCTORS ||--o{ FEEDBACK : "1:N"
-    PATIENTS ||--o{ VIDEO_CONSULTATIONS : "1:N"
-    DOCTORS ||--o{ VIDEO_CONSULTATIONS : "1:N"
-    USERS ||--o{ MESSAGES : "1:N"
-
----
-
-## 🔐 Security Notes
-
-- Passwords are currently stored in plain text (for demo purposes)
-- Always use HTTPS in production
-- Recommended enhancements:
-  - Password hashing (bcrypt)
-  - TLS for database connections
-  - JWT for authentication
+```
 
 ---
 
 ## ✉️ Contact
+Project Team:
+- Ailya Zainab
+- Luqman Shehzad  
+- Muhammad Hassan
 
-- Ailya Zainab 
-- Luqman Shehzad 
-- Muhammad Hassan 
-
-Project Link: https://github.com/Ailya-Shah/OOP-PROJECT2025
+Repository: [https://github.com/Ailya-Shah/OOP-PROJECT2025](https://github.com/Ailya-Shah/OOP-PROJECT2025)
 
 ---
 
-*"Innovating healthcare through secure, accessible technology"* 🚑💻
+*"Innovating healthcare through secure technology"* 🚑💻
+```
+
