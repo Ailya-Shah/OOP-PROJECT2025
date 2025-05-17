@@ -214,7 +214,7 @@ erDiagram
     DOCTORS ||--o{ FEEDBACK : "1:N"
     PATIENTS ||--o{ VIDEO_CONSULTATIONS : "1:N"
     DOCTORS ||--o{ VIDEO_CONSULTATIONS : "1:N"
-    USERS ||--o{ MESSAGES : "1:N"}
+    USERS ||--o{ MESSAGES : "1:N"
 
 ---
 
