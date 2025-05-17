@@ -1,6 +1,3 @@
-
-
-```markdown
 # 🌟 Remote Patient Monitoring System (RPMS)
 
 *A comprehensive Java-based telemedicine platform with real-time monitoring, secure communication, and health analytics*
@@ -81,9 +78,6 @@ All dependencies are managed through Maven. Key dependencies include:
     <artifactId>twilio</artifactId>
     <version>9.2.3</version>
 </dependency>
-```
-
----
 
 ## 📥 Direct JAR Downloads
 
