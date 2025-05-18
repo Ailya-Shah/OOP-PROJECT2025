@@ -112,6 +112,122 @@ CREATE DATABASE hospitalmanagementsystem;
 
 # Import schema
 mysql -u root -p hospitalmanagementsystem < sql/setup.sql
+
+# Create following tables in MySQL by running queries:
+SCHEMA:
+CREATE DATABASE hospitalmanagementsystem;
+USE hospitalmanagementsystem;
+
+-- Users table: Stores common user information
+CREATE TABLE users (
+    user_id VARCHAR(50) PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    contact_info VARCHAR(20) NOT NULL,
+    gender VARCHAR(10) NOT NULL,
+    role ENUM('PATIENT', 'DOCTOR', 'ADMIN') NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE
+);
+
+-- Patients table: Stores patient-specific information
+CREATE TABLE patients (
+    user_id VARCHAR(50) PRIMARY KEY,
+    birth_date DATE NOT NULL,
+    admission_date DATE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Doctors table: Stores doctor-specific information
+CREATE TABLE doctors (
+    user_id VARCHAR(50) PRIMARY KEY,
+    joining_date DATE NOT NULL,
+    specialization VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Administrators table: Stores administrator-specific information
+CREATE TABLE administrators (
+    user_id VARCHAR(50) PRIMARY KEY,
+    password VARCHAR(255) NOT NULL,
+    joining_date DATE NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Appointments table: Stores appointment details
+CREATE TABLE appointments (
+    appointment_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    appointment_time DATETIME NOT NULL,
+    patient_id VARCHAR(50) NOT NULL,
+    doctor_id VARCHAR(50) NOT NULL,
+    status ENUM('Pending', 'Approved', 'Canceled') NOT NULL DEFAULT 'Pending',
+    FOREIGN KEY (patient_id) REFERENCES patients(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(user_id) ON DELETE CASCADE
+);
+
+-- Vitals table: Stores patient vital signs
+CREATE TABLE vitals (
+    vital_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    patient_id VARCHAR(50) NOT NULL,
+    checkup_date DATE NOT NULL,
+    heart_rate DOUBLE NOT NULL,
+    blood_pressure DOUBLE NOT NULL,
+    body_temperature DOUBLE NOT NULL,
+    oxygen_level DOUBLE NOT NULL,
+    FOREIGN KEY (patient_id) REFERENCES patients(user_id) ON DELETE CASCADE
+);
+
+-- Feedback table: Stores feedback from doctors to patients
+CREATE TABLE feedback (
+    feedback_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    patient_id VARCHAR(50) NOT NULL,
+    doctor_id VARCHAR(50) NOT NULL,
+    date DATE NOT NULL,
+    comments TEXT NOT NULL,
+    FOREIGN KEY (patient_id) REFERENCES patients(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(user_id) ON DELETE CASCADE
+);
+
+-- Prescriptions table: Stores prescription details
+CREATE TABLE prescriptions (
+    prescription_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    patient_id VARCHAR(50) NOT NULL,
+    medication VARCHAR(100) NOT NULL,
+    dosage VARCHAR(50) NOT NULL,
+    schedule VARCHAR(100) NOT NULL,
+    FOREIGN KEY (patient_id) REFERENCES patients(user_id) ON DELETE CASCADE
+);
+
+-- Messages table: Stores chat messages between users
+CREATE TABLE messages (
+    message_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    sender_id VARCHAR(50) NOT NULL,
+    receiver_id VARCHAR(50) NOT NULL,
+    message TEXT NOT NULL,
+    timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Video Consultations table: Stores video call details
+CREATE TABLE video_consultations (
+    call_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    doctor_id VARCHAR(50) NOT NULL,
+    patient_id VARCHAR(50) NOT NULL,
+    scheduled_time DATETIME NOT NULL,
+    meeting_link VARCHAR(255) NOT NULL,
+    FOREIGN KEY (doctor_id) REFERENCES doctors(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (patient_id) REFERENCES patients(user_id) ON DELETE CASCADE
+);
+
+-- System Logs table: Stores system activity logs
+CREATE TABLE system_logs (
+    log_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+    action VARCHAR(255) NOT NULL,
+    log_date DATE NOT NULL
+);
 ```
 
 ### 3. Configuration
