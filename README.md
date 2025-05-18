@@ -1,6 +1,4 @@
 
-
-```markdown
 # 🌟 Remote Patient Monitoring System (RPMS)
 
 *A comprehensive Java-based telemedicine platform with real-time monitoring, secure communication, and health analytics*
@@ -136,7 +134,6 @@ mvn clean install
 mvn javafx:run
 ```
 
----
 
 ## 🔧 Troubleshooting
 
